@@ -1,0 +1,41 @@
+name: Deploy Astro to VPS
+
+on:
+  push:
+    branches: [main]
+  # Allows you to run this workflow manually from the Actions tab on GitHub.
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --silent
+
+      - name: Build Astro project
+        run: npm run build --quiet
+
+      - name: Deploy to VPS
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rlgoDzvc -i --delete"
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
+          REMOTE_PORT: ${{ secrets.SSH_PORT }}
+          SCRIPT_BEFORE: |
+            ssh-keyscan -p ${{ secrets.SSH_PORT }} -H ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
+          SCRIPT_AFTER: |
+            echo $RSYNC_STDOUT
