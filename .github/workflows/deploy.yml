@@ -1,4 +1,4 @@
-name: Deploy Astro to VPS
+name: Deploy frontend to VPS
 
 on:
   push:
@@ -11,19 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Install dependencies
-        run: npm install --silent
-
-      - name: Build Astro project
-        run: npm run build --quiet
+          cache: 'pnpm'
+        env:
+          VITE_BASE_URL: ${{ secrets.API_URL }}
+      - run: pnpm install --silent
+      - run: pnpm run build --quiet
 
       - name: Deploy to VPS
         uses: easingthemes/ssh-deploy@main
