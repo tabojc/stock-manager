@@ -17,7 +17,7 @@ export default function Navigator({ routes, open }) {
           [`& .MuiDrawer-paper`]: {
             width: drawerWidth,
             boxSizing: "border-box",
-            backgroundColor: "rgb(13.3, 13.3, 13.3)",
+            backgroundColor: "#607d8b"
           },
         }}
       >

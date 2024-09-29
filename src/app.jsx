@@ -131,8 +131,8 @@ export default function App() {
             width: {
               sm: !mobileOpen ? `calc(100% - ${drawerWidth}px)` : `calc(100%)`,
             },
-            ml: { sm: !mobileOpen ? `${drawerWidth}px` : 0 },
-            backgroundColor: "rgba(251, 185, 49, 0.63)",
+            ml: { sm: !mobileOpen ? `${drawerWidth}px` : 0 },          //backgroundColor: "rgba(251, 185, 49, 0.63)",
+            backgroundColor: "#fafafa",
           }}
         >
           <Switch>
