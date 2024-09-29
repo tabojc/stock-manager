@@ -1,20 +1,20 @@
 import { createTheme } from "@mui/material/styles";
 import { orangePalette } from "./colors";
-import { deepPurple, grey, pink, yellow } from "@mui/material/colors";
+import { deepPurple, grey, pink, yellow, blueGrey } from "@mui/material/colors";
 
 const theme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      light: yellow[100],
-      main: orangePalette[700],
-      dark: orangePalette[800],
+      light: grey[100],
+      main: "#007BFF",
+      dark: blueGrey[500], // "#6C757D", // grey[700], //
       contrastText: grey[50],
     },
     secondary: {
       light: deepPurple[50],
       main: deepPurple[600],
-      dark: deepPurple[900],
+      dark: deepPurple["A200"],
       contrastText: grey[50],
     },
     warning: {

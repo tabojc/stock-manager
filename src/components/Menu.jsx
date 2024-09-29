@@ -13,10 +13,10 @@ import { useLocation, useRoute } from "wouter";
 
 const StyledBox = styled(Box)(({ theme }) => ({
   ["& .MuiListItemButton-root"]: {
-    color: "#fff",
-    backgroundColor: "(13.3, 13.3, 13.3)",
+    color: theme.palette.primary.contrastText,
+    backgroundColor: theme.palette.primary.dark,
     ["& .MuiListItemIcon-root"]: {
-      color: "#fff",
+      color: theme.palette.primary.contrastText,
     },
   },
 
@@ -25,7 +25,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
     outline: "1px solid rgb(13.3, 13.3, 13.3)",
     ["& .MuiListItemIcon-root"]: {
-      color: "#000",
+      color: theme.palette.primary.contrastText,
     },
   },
 
@@ -33,15 +33,15 @@ const StyledBox = styled(Box)(({ theme }) => ({
     color: "#000",
     backgroundColor: theme.palette.primary.main,
     ["& .MuiListItemIcon-root"]: {
-      color: "#000",
+      color: theme.palette.primary.contrastText,
     },
   },
 
   ["& .MuiListItemButton-root.Mui-active"]: {
-    color: "#000",
-    backgroundColor: "rgb(238, 238, 238)",
+    color: theme.palette.primary.contrastText,
+    backgroundColor: theme.palette.primary.main,
     ["& .MuiListItemIcon-root"]: {
-      color: "#000",
+      color: theme.palette.primary.contrastText,
     },
   },
 }));
