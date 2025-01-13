@@ -1,5 +1,6 @@
 import { useAuthStore } from "@/store/auth";
 import { getRoutes } from "@/utils/getRoutes";
+import { useEffect } from "react";
 import { useMemo } from "react";
 
 export function useAuthData(routes, allowedRouteByRole) {
@@ -8,6 +9,8 @@ export function useAuthData(routes, allowedRouteByRole) {
   const username = useAuthStore((state) => state.username);
   const logout = useAuthStore((state) => state.logout);
   const login = useAuthStore((state) => state.login);
+  const accessToken  = useAuthStore((state) => state.accessToken);
+  const getProfile  = useAuthStore((state) => state.getProfile);
 
   const routesByUser = useMemo(() => {
     return getRoutes(routes, allowedRouteByRole, role);
@@ -21,6 +24,10 @@ export function useAuthData(routes, allowedRouteByRole) {
       return { ...allowed, [path]: isFound };
     }, {});
   }, [routes, routesByUser]);
+
+  useEffect(() => {
+      getProfile();
+  }, []);
 
   return {
     role,
