@@ -26,7 +26,7 @@ export default function LoginPage() {
 
     await login({ username, password });
 
-    if (accessToken != "" && !message) {
+    if (accessToken) {
       setLocation("/dashboard");
     } else {
       setLocation(location);

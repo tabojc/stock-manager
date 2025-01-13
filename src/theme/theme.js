@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 import { orangePalette } from "./colors";
-import { deepPurple, grey, pink, yellow, blueGrey } from "@mui/material/colors";
+import { deepPurple, grey, pink, blue } from "@mui/material/colors";
 
 const theme = createTheme({
   palette: {
@@ -8,7 +8,7 @@ const theme = createTheme({
     primary: {
       light: grey[100],
       main: "#007BFF",
-      dark: blueGrey[500], // "#6C757D", // grey[700], //
+      dark: blue[800], // "#6C757D", // grey[700], //
       contrastText: grey[50],
     },
     secondary: {

@@ -1,7 +1,7 @@
 import Typography from "@mui/material/Typography";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
+//import Dialog from "@mui/material/Dialog";
+//import DialogTitle from "@mui/material/DialogTitle";
+//import DialogContent from "@mui/material/DialogContent";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -23,20 +23,52 @@ const styles = {
     },
   },
 };
+//{ theme }
+import styled from "@emotion/styled";
+
+const LoginBox = styled(Box)(({ theme }) => ({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    maxWidth: "100vw",
+    height: "100vh",
+    backgroundColor: theme.palette.primary.main,
+    padding: 8,
+    "& div.login__content": {
+      maxWidth: 400,
+      padding: 8,
+      backgroundColor: "white",
+      borderRadius: 10,
+      /*marginTop: "-24%",*/
+    },
+    "& .login__header": {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      padding: 8,
+    },
+    "& .login__header img": {
+      padding: 14,
+    }
+}));
 
 function Welcome(props) {
   return (
+  <>
     <Typography
-      variant="subtitle2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Bienvenido al "}
-      <Typography variant="span" color="text.primary">
-        {"Centro de operaciones de ArCambio."}
+        variant="subtitle2"
+        color="text.secondary"
+        align="center"
+        {...props}
+      >
+      <Typography variant="span" color="text.primary" align="center">
+        {"Sistema "}
       </Typography>
+       {"para seguimiento y control de inventarios"}
     </Typography>
+
+  </>
   );
 }
 
@@ -46,26 +78,12 @@ export default function LoginPage({ message, onSubmit }) {
 
   return (
     <>
-      <Dialog
-        fullScreen={fullScreen}
-        open={true}
-        aria-labelledby="login"
-        sx={{ ...styles.dialog }}
-      >
-        <DialogTitle>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              margin: 2,
-            }}
-          >
-            <img src={logo} width="130px" alt="ArCambio App" />
+      <LoginBox>
+        <Box className="login__content">
+          <Box className="login__header">
+            <img src={logo} width="150px" alt="ArCambio App" />
+            <Welcome />
           </Box>
-        </DialogTitle>
-        <Welcome />
-        <DialogContent>
           <Box component="form" onSubmit={onSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               required
@@ -86,13 +104,13 @@ export default function LoginPage({ message, onSubmit }) {
             >
               Inicio de Sesión
             </Button>
+            <Typography variant="subtitle2" color="text.secondary" align="center">
+              {message && <>{message}</>}
+            </Typography>
           </Box>
-          <Typography variant="subtitle2" color="text.secondary" align="center">
-            {message && <>{message}</>}
-          </Typography>
-        </DialogContent>
-        <Copyright sx={{ mt: 1, mb: 4 }} />
-      </Dialog>
+          <Copyright sx={{ mt: 1, mb: 4 }} />
+        </Box>
+      </LoginBox>
     </>
   );
 }

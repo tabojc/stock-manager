@@ -10,7 +10,7 @@ export function Loader() {
         height: "100vh",
       }}
     >
-      <div className="spinner" />asd
+      <div className="spinner" />
     </div>
   );
 }

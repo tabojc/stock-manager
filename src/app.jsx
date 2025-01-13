@@ -32,10 +32,10 @@ const BillingsPage = lazy(() => import("./pages/Billings"));
 const BalancePage = lazy(() => import("./pages/Balance"));
 
 const allowedRouteByRole = [
-  { id: 1, routeId: "order", role: ["admin", "user"] },
-  { id: 2, routeId: "bank", role: ["admin", "user"] },
-  { id: 3, routeId: "customer", role: ["admin", "user"] },
-  { id: 4, routeId: "account", role: ["admin", "user"] },
+  { id: 1, routeId: "order", role: ["admin", "customer"] },
+  { id: 2, routeId: "bank", role: ["admin", "customer"] },
+  { id: 3, routeId: "customer", role: ["admin", "customer"] },
+  { id: 4, routeId: "account", role: ["admin", "customer"] },
   { id: 5, routeId: "balance", role: ["admin"] },
   { id: 5, routeId: "rate", role: ["admin"] },
   { id: 5, routeId: "transaction", role: ["admin"] },
@@ -110,28 +110,38 @@ export default function App() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { mobileToggle, mobileOpen } = useApplicationData();
-
+  console.log({isAuth})
   /*const [location] = useHashLocation();*/
+  const getDrawerWidthByAuthAndMobile = ({isAuth, width, isMobile}) => {
+    if (!isAuth) return 0;
+    if (isMobile) return 0;
+    return width;
+  }
+
+  const menuWidth = getDrawerWidthByAuthAndMobile({isAuth, width: drawerWidth, isMobile: mobileOpen});
 
   return (
     <Suspense fallback={<Loader />}>
       <Router hook={useHashLocation}>
-        <Header
-          username={username}
-          isMobile={isMobile}
-          onClick={mobileToggle}
-          onSignOut={logout}
-        />
-        <Navigator routes={routesByUser} open={mobileOpen} />
+        {isAuth && (
+          <>
+            <Header
+              username={username}
+              isMobile={isMobile}
+              onClick={mobileToggle}
+              onSignOut={logout}
+            />
+            <Navigator routes={routesByUser} open={mobileOpen} />
+          </>)}
         <Box
           component="main"
           sx={{
             overflow: "auto",
-            height: "calc(94vh - 50px)",
+            height: isAuth ? "calc(94vh - 50px)": "100vh",
             width: {
-              sm: !mobileOpen ? `calc(100% - ${drawerWidth}px)` : `calc(100%)`,
+              sm: !mobileOpen ? `calc(100% - ${menuWidth}px)` : `calc(100%)`,
             },
-            ml: { sm: !mobileOpen ? `${drawerWidth}px` : 0 },          //backgroundColor: "rgba(251, 185, 49, 0.63)",
+            ml: { sm: !mobileOpen ? `${menuWidth}px` : 0 },          //backgroundColor: "rgba(251, 185, 49, 0.63)",
             backgroundColor: "#fafafa",
           }}
         >
@@ -214,8 +224,11 @@ export default function App() {
             </Route>
           </Switch>
         </Box>
-        <Copyright />
-        <Notification />
+        {isAuth && (
+          <>
+            <Copyright />
+            <Notification />
+          </>)}
       </Router>
     </Suspense>
   );

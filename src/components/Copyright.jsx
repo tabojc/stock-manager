@@ -1,4 +1,6 @@
 import Typography from "@mui/material/Typography";
+import Link from '@mui/material/Link';
+
 
 export function Copyright(props) {
   return (
@@ -8,8 +10,12 @@ export function Copyright(props) {
       align="center"
       {...props}
     >
-      {" Powered by "}
-      <Typography variant="span">AW technology 2024.</Typography>
+      <Typography variant="span">Desarrollado por</Typography>
+      <Link
+        href="https://www.linkedin.com/in/juantaborda/"
+        underline="none"
+        rel="noreferrer"
+        target="_blank" > Ing. Juan Taborda</Link>
     </Typography>
   );
 }
