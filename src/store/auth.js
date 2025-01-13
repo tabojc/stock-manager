@@ -1,12 +1,12 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { fetchLogin, fetchLogout } from "@/services/auth";
+import { fetchLogin, fetchLogout, fetchProfile } from "@/services/auth";
 import { getResponseError } from "@/utils/getResponseError";
 import { FETCH_LOGIN, FETCH_LOGOUT } from "@/utils/constants";
 
 const mapAuthToRequestJson = (auth) => {
   return auth.map((data) => ({
-    corporate_email: data?.username,
+    email: data?.username,
     password: data?.password,
   }));
 };
@@ -35,14 +35,13 @@ export const useAuthStore = create(
           try {
             const response = await fetchLogin(data);
 
-            const { message, access_token: accessToken, role } = response;
+            const { access_token: accessToken} = response;
 
-            if (message && accessToken) {
+            if (accessToken) {
               set(
                 {
                   username: username,
                   accessToken: accessToken,
-                  role: role,
                   isAuth: true,
                   error: {
                     message: "",
@@ -132,6 +131,19 @@ export const useAuthStore = create(
             set({ isAuth: !isAuth, accessToken: "" }, false, "REMOVE_AUTH");
           } else {
             set({ error: "Error Auth" }, false, "REMOVE_AUTH");
+          }
+        },
+
+        getProfile: async () => {
+          const accessToken = get().accessToken;
+
+          const response = await fetchProfile();
+
+          const { role } = response;
+          if (role) {
+            set({ role }, false, "PROFILE_AUTH");
+          } else {
+            set({ error: "Error Auth", role: "" }, false, "PROFILE_AUTH");
           }
         },
       };

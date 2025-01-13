@@ -1,6 +1,6 @@
 import { fetchBase } from "../utils/fetchBase";
 
-const signIn = "login";
+const signIn = "auth/login";
 const signOut = "logout";
 
 export const fetchLogout = () => {
@@ -16,3 +16,11 @@ export const fetchLogin = (data) => {
     options: { method: "POST" },
   });
 };
+
+export const fetchProfile = () => {
+  const profile = "auth/profile";
+  return fetchBase({
+    path: profile,
+    options: { method: "GET" },
+  });
+}
