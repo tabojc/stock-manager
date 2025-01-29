@@ -32,27 +32,28 @@ const BillingsPage = lazy(() => import("./pages/Billings"));
 const BalancePage = lazy(() => import("./pages/Balance"));
 
 const allowedRouteByRole = [
-  { id: 1, routeId: "order", role: ["admin", "customer"] },
+  //{ id: 1, routeId: "order", role: ["admin", "customer"] },
   { id: 2, routeId: "bank", role: ["admin", "customer"] },
   { id: 3, routeId: "customer", role: ["admin", "customer"] },
   { id: 4, routeId: "account", role: ["admin", "customer"] },
-  { id: 5, routeId: "balance", role: ["admin"] },
-  { id: 5, routeId: "rate", role: ["admin"] },
-  { id: 5, routeId: "transaction", role: ["admin"] },
-  { id: 5, routeId: "user", role: ["admin"] },
+  { id: 5, routeId: "balance", role: ["admin", "customer"] },
+  { id: 6, routeId: "rate", role: ["admin", "customer"] },
+  { id: 7, routeId: "transaction", role: ["admin", "customer"] },
+  { id: 8, routeId: "user", role: ["admin", "customer"] },
+  { id: 9, routeId: "products", role: ["admin", "customer"] },
 ];
 
 const routes = [
   {
     id: "order",
-    title: "Operaciones",
+    title: "Movimientos",
     path: "/orders",
     children: [],
   },
   {
     id: "bank",
-    title: "Bancos",
-    path: "/banks",
+    title: "Proveedores",
+    path: "/suppliers",
     children: [],
   },
   {
@@ -63,32 +64,38 @@ const routes = [
   },
   {
     id: "account",
-    title: "Cuentas",
+    title: "Entradas",
     path: "/billings",
     children: [],
   },
   {
     id: "balance",
-    title: "Saldos",
+    title: "Salidas",
     path: "/balance",
     children: [],
   },
   {
     id: "rate",
-    title: "Tasas",
+    title: "Inventario",
     path: "/rates",
     children: [],
   },
-  {
+  /*{
     id: "transaction",
-    title: "Transacciones",
+    title: "Movimientos",
     path: "/transactions",
     children: [],
-  },
+  },*/
   {
     id: "user",
     title: "Usuarios",
     path: "/users",
+    children: [],
+  },
+  {
+    id: "products",
+    title: "Productos",
+    path: "/products",
     children: [],
   },
 ];

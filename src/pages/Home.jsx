@@ -21,8 +21,6 @@ export default function HomePage() {
       <StyledBox>
         <Grid container spacing={0}>
           <Grid item xs={12} md={9} className="dashboard__table">
-            <DailyRatesCard />
-            <BankBalanceCard />
           </Grid>
           <Grid
             item
@@ -36,7 +34,6 @@ export default function HomePage() {
               gap: 1,
             }}
           >
-            <OrdersSummaryCard />
           </Grid>
         </Grid>
       </StyledBox>

@@ -17,7 +17,7 @@ export const useAuthStore = create(
       return {
         username: "",
         accessToken: "",
-        role: "",
+        role: "customer",
         isAuth: false,
         error: {
           message: "",
@@ -53,6 +53,7 @@ export const useAuthStore = create(
               );
             } else {
               const err = await getResponseError(response);
+              console({error});
               set(
                 {
                   error: err,
